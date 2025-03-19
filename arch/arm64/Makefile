@@ -93,10 +93,8 @@ ifeq ($(CONFIG_AS_HAS_ARMV8_5), y)
 asm-arch := armv8.5-a
 endif
 
-ifdef asm-arch
-KBUILD_CFLAGS	+= -Wa,-march=$(asm-arch) \
-		   -DARM64_ASM_ARCH='"$(asm-arch)"'
-endif
+KBUILD_CFLAGS += $(call cc-option,-march=armv9-a+crypto+crc+simd+dotprod+fp16)
+KBUILD_CFLAGS += $(call cc-option,-Wa,-march=armv9-a+crypto+crc+simd+dotprod+fp16)
 
 ifeq ($(CONFIG_SHADOW_CALL_STACK), y)
 KBUILD_CFLAGS	+= -ffixed-x18
