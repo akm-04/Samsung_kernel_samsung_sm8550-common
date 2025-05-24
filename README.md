@@ -1,3 +1,51 @@
+From AKM
+===============================
+
+This repository contains multiple branches of a Samsung SM8550-based kernel, including upstream merges, stock-based trees, and custom patches such as KernelSU and SUSFS integration.
+
+---
+
+## 📂 Branch Details
+
+| Branch Name                      | Description                                                                                     |
+|----------------------------------|-------------------------------------------------------------------------------------------------|
+| **A-15_Upstream_Merged**         | Based on `A15_Stock_CLO` but merged with the latest AOSP upstream (GKI).         |
+| **A15_Stock_CLO**                | Stock kernel merged with latest Code Linaro base + cherry-picks of my custom commits.    |
+| **A14_Stock_CLO**                | Final Edgars-Cirulis's “CLO” release for OneUI 6.1 (kernel 5.15.148).             |
+| **A-14_Upstream_Merged**         | Based on `A14_Stock_CLO` but with AOSP upstream merged.                               |
+| **Old_AOSP_Merged_with_KSUN**    | Legacy branch mixing `A14_Stock_CLO` with older SUSFS & KernelSU patches (no longer used).     |
+| **android13-5.15**               | Pure copy of Edgars-Cirulis's “android13-5.15” branch—no extra commits.                      |
+
+---
+## 🛠️ Build Instructions
+
+1. **Clone the repo** and choose your branch:
+   ```bash
+   git clone https://github.com/akm-04/Samsung_kernel_sm8550-common_Upstream_KernelSU-Next_SUSFS.git
+   cd Samsung_kernel_sm8550-common_Upstream_KernelSU-Next_SUSFS
+   git checkout <branch name>
+2. Configure build.sh at the top for your environment:
+    - Use build.sh script in the root directory to start compile the kernel. Configure the build script as needed by specifying clang directories.
+    - Build script has options to compile with KernelSU or apply SUSFS patches (Enable either KernelSU or SUKISU or Kernelsu-next, do not enable all or more than one), set it up by editing the variables at the top.
+   ```bash
+   PATCH_SUSFS=1                    # 1 = apply SUSFS patch
+   ENABLE_KSU_NEXT=0                # 1 = enable KernelSU-Next
+   ENABLE_SUKISU=0                  # 1 = enable SukiSU-Ultra
+   ENABLE_KSU=1                     # 1 = enable classic KernelSU
+| Variable              | Description                                                     | Values      |
+| --------------------- | --------------------------------------------------------------- | ----------- |
+| `PATCH_SUSFS`         | Apply SUSFS4KSU patch series from SimonPunk Gitlab repo                | `0` / `1`   |
+| `SUSFS_CHECKOUT_HASH` | (Optional) Specific SUSFS commit SHA to checkout. Set it to empty string to fetch latest release .   | SHA or `""` |
+| `ENABLE_KSU_NEXT`     | Enable KernelSU-Next integration                                | `0` / `1`   |
+| `KSU_NEXT_STABLE`     | If using KernelSU-Next, pick stable (`1`) or dev (`0`) branches | `0` / `1`   |
+| `KSUN_CHECKOUT_HASH`  | (Optional) Specific KernelSU-Next commit SHA to checkout. Set it to empty string to fetch latest release.   | SHA or `""` |
+| `ENABLE_SUKISU`       | Enable SukiSU-Ultra integration                                 | `0` / `1`   |
+| `SUKI_CHECKOUT_HASH`  | (Optional) Specific SukiSU Ultra commit SHA. Set it to empty string to fetch latest release.          | SHA or `""` |
+| `ENABLE_KSU`          | Enable classic KernelSU (By tiann) integration                             | `0` / `1`   |
+| `KSU_CHECKOUT_HASH`   | (Optional) Specific KernelSU commit SHA. Set it to empty string to fetch latest release.       | SHA or `""` |
+
+3. Build the kernel by running the build script, final TWRP flashable kernel zip should be produced inside the AnyKernel3 directory.
+
 # How do I submit patches to Android Common Kernels
 
 1. BEST: Make all of your changes to upstream Linux. If appropriate, backport to the stable releases.
