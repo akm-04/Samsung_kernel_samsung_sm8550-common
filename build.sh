@@ -32,7 +32,7 @@ echo -e " $yellow #####|       top of the script to enable KernelSU patches   |#
 KERNEL_DEFCONFIG=gki_defconfig  # Looks for defconfig in arch/<exported_arch>/configs/
 ANYKERNEL3_DIR=$PWD/AnyKernel3/ # Required by the function zip_kernel
 CLANG_VERSION=clang-r547379
-CLANG_DIR="/home/akm/Git/Clang/$CLANG_VERSION"
+CLANG_DIR="$HOME/Git/Clang/$CLANG_VERSION"
 CLANG_BINARY="$CLANG_DIR/bin/clang"
 CC_CLANG=clang
 export ARCH=arm64
