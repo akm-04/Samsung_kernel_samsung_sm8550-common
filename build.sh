@@ -64,6 +64,7 @@ MAKE_FLAGS=( \
   LD=ld.lld \
   LLVM=1 \
   LLVM_IAS=1 \
+  "HOSTCFLAGS=-Wno-error=int-conversion -Wno-implicit-function-declaration"
 )
 
 # ---------------------------------------------------------------------------- #
